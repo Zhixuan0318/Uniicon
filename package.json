@@ -15,7 +15,21 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "viem": "^2.31.0",
-    "x402-next": "^0.3.4"
+    "x402-next": "^0.3.4",
+    "@aws-sdk/client-bedrock": "^3.817.0",
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.817.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.817.0",
+    "@huggingface/inference": "^3.14.0",
+    "@runwayml/sdk": "^2.1.0",
+    "buffer": "^6.0.3",
+    "canvas": "^3.1.0",
+    "file-type": "^21.0.0",
+    "fs": "^0.0.1-security",
+    "openai": "^4.103.0",
+    "path": "^0.12.7",
+    "replicate": "^1.0.1",
+    "sharp": "^0.34.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
