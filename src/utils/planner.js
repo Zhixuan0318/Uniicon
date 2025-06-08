@@ -2,7 +2,6 @@ import {
   BedrockAgentRuntimeClient,
   InvokeAgentCommand,
 } from "@aws-sdk/client-bedrock-agent-runtime";
-import "dotenv/config";
 import { v4 as uuidv4 } from "uuid";
 
 const client = new BedrockAgentRuntimeClient({

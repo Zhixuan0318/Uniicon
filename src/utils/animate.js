@@ -1,5 +1,4 @@
 import RunwayML from '@runwayml/sdk';
-import "dotenv/config";
 
 const mimeType = 'image/png';
 const ratio = '960:960';
