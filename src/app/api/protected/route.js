@@ -1,0 +1,28 @@
+import animate from "../../../utils/animate.js";
+import generate from "../../../utils/generate.js";
+import clean from "../../../utils/cleaner.js";
+import extract from "../../../utils/extract.js";
+import interpret from "../../../utils/interpret.js";
+import planner from "../../../utils/planner.js";
+
+export async function POST(request) {
+  try {
+    const { input } = await request.json();
+
+    const extractedData = await extract(input);
+    const base64Image = await generate(extractedData);
+    const imageBuffer = Buffer.from(base64Image, "base64");
+    const cleanImageBuffer = await clean(imageBuffer);
+    const interpretedText = await interpret(imageBuffer);
+    const planText = await planner(interpretedText);
+    const animationResult = await animate(cleanImageBuffer, planText);
+
+    return Response.json({ result: animationResult });
+  } catch (error) {
+    console.error("Error in protected workflow:", error);
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
