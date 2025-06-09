@@ -1,6 +1,7 @@
 {
   "name": "icon-x402-next",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -12,6 +13,8 @@
     "@aws-sdk/client-bedrock": "^3.817.0",
     "@aws-sdk/client-bedrock-agent-runtime": "^3.817.0",
     "@aws-sdk/client-bedrock-runtime": "^3.817.0",
+    "@coinbase/cdp-sdk": "^1.13.0",
+    "@coinbase/coinbase-sdk": "^0.25.0",
     "@coinbase/x402": "^0.3.8",
     "@huggingface/inference": "^3.14.0",
     "@runwayml/sdk": "^2.1.0",
