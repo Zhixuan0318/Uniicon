@@ -1,6 +1,6 @@
 import { http, createPublicClient } from "viem";
 import { baseSepolia } from "viem/chains";
-import "dotenv/config";
+import { CdpClient } from "@coinbase/cdp-sdk";
 
 // Set up the public client
 const publicClient = createPublicClient({
@@ -8,8 +8,29 @@ const publicClient = createPublicClient({
   transport: http(),
 });
 
-// Load sender wallet from environment variables (ensure sender is a connected wallet object)
-const sender = process.env.AGENT_WALLET;
+//Prepare agent evm account
+const cdp = new CdpClient();
+const accountName = "agent";
+// If the account doesn't exist, it will be created.
+let sender = await cdp.evm.getOrCreateAccount({
+  name: accountName
+});
+console.log(`Created account with name ${sender.name}.`);
+
+// If the account already exists, it will be retrieved.
+sender = await cdp.evm.getOrCreateAccount({
+  name: accountName
+});
+console.log(`Retrieved account with name ${sender.name}.`);
+console.log(sender);
+
+const faucetResponse = await cdp.evm.requestFaucet({
+  address: sender.address,
+  network: "base-sepolia",
+  token: "eth"
+});
+console.log(`Requested funds from ETH faucet: https://sepolia.basescan.org/tx/${faucetResponse.transactionHash}`);
+
 
 // Define owner addresses
 const owners = {
@@ -40,11 +61,14 @@ async function sendUSDC(to, amount) {
 
   console.log(`Sent ${amount} USDC to ${to}`);
   console.log(`Transfer status: ${receipt.status}`);
-  console.log(`Explorer link: https://sepolia.basescan.org/tx/${receipt.transactionHash}`);
+  console.log(
+    `Explorer link: https://sepolia.basescan.org/tx/${receipt.transactionHash}`
+  );
 }
 
 // Main distribution function
 export default async function distributeUSDC() {
+  console.log(sender);
   for (const address of Object.values(owners)) {
     await sendUSDC(address, splitAmount);
   }
