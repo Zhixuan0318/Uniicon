@@ -20,10 +20,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-[#36322f]`}
       >
-        {children}
+        <div className="flex justify-center w-full">
+          <div className="w-full max-w-[100vw] px-[15vw]">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
 }
+
