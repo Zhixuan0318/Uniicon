@@ -8,7 +8,7 @@ export const middleware = paymentMiddleware(
   payTo,
   {
     "/api/protected": {
-      price: "$1.00",
+      price: "$0.01",
       network,
       config: {
         description: "Access to protected content",
