@@ -67,7 +67,8 @@ export default function HomePage() {
         </h1>
 
         <p className="text-center text-[#71717a] text-lg mt-8 max-w-2xl mx-82">
-          Let a team of AI agents to plan, draw, script, and animate any icon you want. X402 protocol-powered, pay-per-use.
+          Let a team of AI agents to plan, draw, script, and animate any icon
+          you want. X402 protocol-powered, pay-per-use.
         </p>
 
         <form
@@ -78,7 +79,16 @@ export default function HomePage() {
           <button
             type="submit"
             disabled={loading}
-            className="mb-20 bg-orange-500 hover:bg-orange-400 text-white font-semibold text-lg px-4 py-2 rounded-2xl transition disabled:opacity-50 w-60 h-14 mt-5"
+            className="
+        w-72 h-12 rounded-[10px] text-sm font-semibold flex items-center justify-center
+        transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50
+        bg-orange-500 text-white hover:bg-orange-400 disabled:bg-orange-200 disabled:text-white
+        [box-shadow:0_0_0_1px_hsl(24,100%,91%),_0_1px_2px_hsl(24,90%,60%),_0_3px_3px_hsl(24,95%,70%),_0_-2px_hsl(24,90%,88%)_inset]
+        hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:0_0_0_1px_hsl(24,100%,91%),_0_1px_2px_hsl(24,90%,60%)]
+        active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:0_0_0_1px_hsl(24,100%,91%),_inset_0_1px_1px_hsl(24,90%,60%)]
+        disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
+        px-4
+      "
           >
             {loading ? "Processing..." : "Generate"}
           </button>
