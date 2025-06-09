@@ -7,6 +7,8 @@ import { privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
 import Header from "@/components/header";
 import Input from "@/components/input";
+import SubmitButton from "@/components/submit-button";
+import Showcase from "@/components/showcase";
 
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_TEST_PRIVATE_KEY;
 
@@ -75,24 +77,11 @@ export default function HomePage() {
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center gap-4 mt-12"
         >
-          <Input />
-          <button
-            type="submit"
-            disabled={loading}
-            className="
-        w-72 h-12 rounded-[10px] text-sm font-semibold flex items-center justify-center
-        transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50
-        bg-orange-500 text-white hover:bg-orange-400 disabled:bg-orange-200 disabled:text-white
-        [box-shadow:0_0_0_1px_hsl(24,100%,91%),_0_1px_2px_hsl(24,90%,60%),_0_3px_3px_hsl(24,95%,70%),_0_-2px_hsl(24,90%,88%)_inset]
-        hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:0_0_0_1px_hsl(24,100%,91%),_0_1px_2px_hsl(24,90%,60%)]
-        active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:0_0_0_1px_hsl(24,100%,91%),_inset_0_1px_1px_hsl(24,90%,60%)]
-        disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100
-        px-4
-      "
-          >
-            {loading ? "Processing..." : "Generate"}
-          </button>
+          <Input/>
+          <SubmitButton loading={loading}/>
         </form>
+
+        <Showcase/>
 
         {result && (
           <div className="p-4 bg-green-100 border-green-400">{result}</div>
