@@ -28,7 +28,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setLoading(true);
     setError(null);
     setResult(null);
@@ -74,11 +74,10 @@ export default function HomePage() {
         </p>
 
         <form
-          onSubmit={handleSubmit}
           className="w-full flex flex-col items-center gap-4 mt-12"
         >
           <Input/>
-          <SubmitButton loading={loading}/>
+          <SubmitButton loading={loading} onSubmit={handleSubmit}/>
         </form>
 
         <Showcase/>
