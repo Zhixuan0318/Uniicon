@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import '@rainbow-me/rainbowkit/styles.css';
+import WalletProvider from "@/context/WalletProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +26,7 @@ export default function RootLayout({ children }) {
       >
         <div className="flex justify-center w-full">
           <div className="w-full max-w-[100vw] px-[15vw]">
-            {children}
+            <WalletProvider>{children}</WalletProvider>
           </div>
         </div>
       </body>
