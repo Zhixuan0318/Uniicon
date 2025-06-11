@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { wrapFetchWithPayment } from "x402-fetch";
 import { createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -10,29 +10,43 @@ import Input from "@/components/input";
 import SubmitButton from "@/components/submit-button";
 import Showcase from "@/components/showcase";
 import ErrorToast from "@/components/error";
+import ResultModal from "@/components/result";
 
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_TEST_PRIVATE_KEY;
-
 const account = privateKeyToAccount(PRIVATE_KEY);
 const walletClient = createWalletClient({
   account,
   chain: baseSepolia,
   transport: http(),
 });
-
 const fetchWithPayment = wrapFetchWithPayment(fetch, walletClient);
 
 export default function HomePage() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // Automatically show modal when result is set
+  useEffect(() => {
+    if (result) {
+      setShowModal(true);
+    }
+  }, [result]);
+
+  // 🔧 TEMPORARY: Show test video for modal styling
+  useEffect(() => {
+    const testVideoURL = "https://sfdylvwdndtsj1a0.public.blob.vercel-storage.com/animated-icon/chicken-5jl2UpHPgBCDSiAaScvR1HOORx6dJU.mp4";
+    setResult(testVideoURL);
+  }, []);
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
     setLoading(true);
     setError(null);
     setResult(null);
+    setShowModal(false);
 
     try {
       const res = await fetchWithPayment("/api/protected", {
@@ -43,7 +57,7 @@ export default function HomePage() {
 
       if (res.ok) {
         const data = await res.json();
-        setResult(data.result);
+        setResult(data.result); // This triggers modal via useEffect
       } else {
         const err = await res.json();
         setError(err.error || "Unknown error");
@@ -74,20 +88,19 @@ export default function HomePage() {
           you want. X402 protocol-powered, pay-per-use.
         </p>
 
-        <form
-          className="w-full flex flex-col items-center gap-4 mt-12"
-        >
-          <Input loading={loading}/>
-          <SubmitButton loading={loading} onSubmit={handleSubmit}/>
+        <form className="w-full flex flex-col items-center gap-4 mt-12">
+          <Input loading={loading} />
+          <SubmitButton loading={loading} onSubmit={handleSubmit} />
         </form>
 
-        <Showcase/>
+        <Showcase />
 
-        {result && (
-          <div className="p-4 bg-green-100 border-green-400">{result}</div>
-        )}
-        {error && <ErrorToast message={error}/>}
+        {error && <ErrorToast message={error} />}
       </div>
+
+      {showModal && result && (
+        <ResultModal url={result} onClose={() => setShowModal(false)} />
+      )}
     </main>
   );
 }
