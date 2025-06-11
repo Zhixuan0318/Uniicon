@@ -39,5 +39,5 @@ export default async function animate(imageBuffer, description) {
     throw new Error(`RunwayML task failed: ${task.error}`);
   }
 
-  return task;
+  return task.output[0];
 }

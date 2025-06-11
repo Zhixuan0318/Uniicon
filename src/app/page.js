@@ -35,11 +35,11 @@ export default function HomePage() {
     }
   }, [result]);
 
-  // 🔧 TEMPORARY: Show test video for modal styling
-  useEffect(() => {
-    const testVideoURL = "https://sfdylvwdndtsj1a0.public.blob.vercel-storage.com/animated-icon/chicken-5jl2UpHPgBCDSiAaScvR1HOORx6dJU.mp4";
-    setResult(testVideoURL);
-  }, []);
+  // // TEMPORARY: Show test video for modal styling
+  // useEffect(() => {
+  //   const testVideoURL = "https://sfdylvwdndtsj1a0.public.blob.vercel-storage.com/animated-icon/chicken-5jl2UpHPgBCDSiAaScvR1HOORx6dJU.mp4";
+  //   setResult(testVideoURL);
+  // }, []);
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
