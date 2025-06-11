@@ -7,7 +7,7 @@ export default function Banner() {
     >
       <div className="group w-full h-13 flex items-center justify-center px-4 text-[#333] bg-[#FBF8F5] hover:bg-[#181717] hover:text-white transition-colors duration-300">
         <div className="flex items-center gap-2 text-md font-medium">
-          <span>Introducing Uniicon at Coinbase Agents in Action Hackathon</span>
+          <span>Introducing <span className="font-semibold text-orange-500">Uniicon</span> at Coinbase Agents in Action Hackathon</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

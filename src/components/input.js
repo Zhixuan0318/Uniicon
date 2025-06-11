@@ -7,12 +7,12 @@ import lock from '../../public/lock.png';
 
 const TARGET_CHAIN_ID = config.chains[0].id;
 
-export default function Input() {
+export default function Input({loading}) {
   const { isConnected } = useAccount();
   const chainId = useChainId();
 
   const needsSwitch = isConnected && chainId !== TARGET_CHAIN_ID;
-  const disabled = !isConnected || needsSwitch;
+  const disabled = !isConnected || needsSwitch || loading;
 
   return (
     <div className="relative w-full max-w-3xl">

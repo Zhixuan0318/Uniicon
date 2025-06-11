@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import Input from "@/components/input";
 import SubmitButton from "@/components/submit-button";
 import Showcase from "@/components/showcase";
+import ErrorToast from "@/components/error";
 
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_TEST_PRIVATE_KEY;
 
@@ -76,7 +77,7 @@ export default function HomePage() {
         <form
           className="w-full flex flex-col items-center gap-4 mt-12"
         >
-          <Input/>
+          <Input loading={loading}/>
           <SubmitButton loading={loading} onSubmit={handleSubmit}/>
         </form>
 
@@ -85,7 +86,7 @@ export default function HomePage() {
         {result && (
           <div className="p-4 bg-green-100 border-green-400">{result}</div>
         )}
-        {error && <div className="p-4 bg-red-100 border-red-400">{error}</div>}
+        {error && <ErrorToast message={error}/>}
       </div>
     </main>
   );
