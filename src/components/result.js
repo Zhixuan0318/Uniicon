@@ -1,10 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import closeIcon from '../../public/close.png';
+import { useEffect, useRef } from "react";
+import { triggerFireworks } from "@/lib/triggerFirework";
+import Image from "next/image";
+import closeIcon from "../../public/close.png";
 
 export default function ResultModal({ url, onClose }) {
+  useEffect(() => {
+    triggerFireworks(2000); // 2 seconds
+  }, []);
+
   const overlayRef = useRef();
 
   // Close modal on outside click
@@ -15,9 +20,9 @@ export default function ResultModal({ url, onClose }) {
   };
 
   const handleDownload = () => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'animated-icon.mp4';
+    link.download = "animated-icon.mp4";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -26,10 +31,10 @@ export default function ResultModal({ url, onClose }) {
   // Escape key closes modal
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose?.();
+      if (e.key === "Escape") onClose?.();
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
   return (
@@ -42,7 +47,7 @@ export default function ResultModal({ url, onClose }) {
         {/* Close icon */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-gray-400 hover:text-gray-600"
+          className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transform transition-transform duration-200 hover:scale-110"
         >
           <Image src={closeIcon} alt="Close" width={35} height={35} />
         </button>
@@ -54,7 +59,8 @@ export default function ResultModal({ url, onClose }) {
 
         {/* Description */}
         <p className="text-sm text-gray-400 text-center mb-8 px-6">
-          Please download it now before closing this modal to prevent losing access. We do not store the result as a backup at our side.
+          Please download it now before closing this modal to prevent losing
+          access. We do not store the result as a backup at our side.
         </p>
 
         {/* Video */}
@@ -73,7 +79,7 @@ export default function ResultModal({ url, onClose }) {
         <div className="flex justify-center">
           <button
             type="button"
-           onClick={handleDownload}
+            onClick={handleDownload}
             className="
               mt-5 rounded-[10px] text-lg font-semibold flex items-center justify-center
               transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50
@@ -91,4 +97,3 @@ export default function ResultModal({ url, onClose }) {
     </div>
   );
 }
- 
