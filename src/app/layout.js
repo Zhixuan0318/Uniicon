@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import '@rainbow-me/rainbowkit/styles.css';
+import "@rainbow-me/rainbowkit/styles.css";
 import WalletProvider from "@/context/WalletProvider";
+import Banner from "@/components/banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,6 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Banner/>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-[#36322f]`}
       >
@@ -33,4 +35,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

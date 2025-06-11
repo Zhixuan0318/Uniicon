@@ -57,7 +57,7 @@ export default function HomePage() {
   return (
     <main>
       <Header />
-      <div className="p-4 mt-35 mx-auto rounded-4xl h- bg-[#FBFAFA]">
+      <div className="p-4 mt-33 mb-10 mx-auto rounded-4xl bg-[#FBFAFA]">
         <h1 className="text-[2.5rem] lg:text-[4.2rem] text-center text-[#36322F] font-semibold tracking-tight leading-[0.9] mt-24">
           The animated icon generator
           <br />
