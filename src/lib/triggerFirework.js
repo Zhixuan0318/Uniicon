@@ -17,7 +17,7 @@ export function triggerFireworks(duration = 1000) {
       return;
     }
 
-    const particleCount = 30 * (timeLeft / duration);
+    const particleCount = 20 * (timeLeft / duration);
     confetti({
       ...defaults,
       particleCount,
