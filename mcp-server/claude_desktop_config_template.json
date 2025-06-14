@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "icon-mcp": {
+      "command": "node",
+      "args": ["<PATH TO YOUR LOCALLY HOSTED MCP.JS>"],
+      "env": {
+        "PRIVATE_KEY": "YOUR-PRIVATE-KEY-HERE",
+        "RESOURCE_SERVER_URL": "",
+        "ENDPOINT_PATH": "/api/protected"
+      }
+    }
+  }
+}
