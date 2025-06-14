@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { wrapFetchWithPayment } from "x402-fetch";
-import { createWalletClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { baseSepolia } from "viem/chains";
+import { useWalletClient } from "wagmi";
+
 import Header from "@/components/header";
 import Input from "@/components/input";
 import SubmitButton from "@/components/submit-button";
@@ -12,16 +11,9 @@ import Showcase from "@/components/showcase";
 import ErrorToast from "@/components/error";
 import ResultModal from "@/components/result";
 
-const PRIVATE_KEY = process.env.NEXT_PUBLIC_TEST_PRIVATE_KEY;
-const account = privateKeyToAccount(PRIVATE_KEY);
-const walletClient = createWalletClient({
-  account,
-  chain: baseSepolia,
-  transport: http(),
-});
-const fetchWithPayment = wrapFetchWithPayment(fetch, walletClient);
-
 export default function HomePage() {
+  const { data: walletClient } = useWalletClient();
+
   const [input, setInput] = useState("");
   const [result, setResult] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -35,13 +27,14 @@ export default function HomePage() {
     }
   }, [result]);
 
-  // // TEMPORARY: Show test video for modal styling
-  // useEffect(() => {
-  //   const testVideoURL = "https://sfdylvwdndtsj1a0.public.blob.vercel-storage.com/animated-icon/chicken-5jl2UpHPgBCDSiAaScvR1HOORx6dJU.mp4";
-  //   setResult(testVideoURL);
-  // }, []);
-
   const handleSubmit = async (e) => {
+    if (!walletClient) {
+      setError("Please connect your wallet first.");
+      return;
+    }
+
+    const fetchWithPayment = wrapFetchWithPayment(fetch, walletClient);
+
     setLoading(true);
     setError(null);
     setResult(null);

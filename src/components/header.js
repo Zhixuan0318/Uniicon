@@ -33,7 +33,7 @@ export default function Header() {
 
         {/* Button Section */}
         <div className="flex space-x-3">
-          <Button>Agent Kit</Button>
+          <Button>Agent</Button>
           <Button>MCP Server</Button>
         </div>
       </header>
