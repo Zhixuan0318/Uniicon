@@ -1,4 +1,3 @@
-// lib/triggerFirework.js
 import confetti from "canvas-confetti";
 
 export function triggerFireworks(duration = 1000) {

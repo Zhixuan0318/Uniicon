@@ -7,7 +7,7 @@ import lock from '../../public/lock.png';
 
 const TARGET_CHAIN_ID = config.chains[0].id;
 
-export default function Input({loading}) {
+export default function Input({ value, onChange, loading }) {
   const { isConnected } = useAccount();
   const chainId = useChainId();
 
@@ -17,6 +17,8 @@ export default function Input({loading}) {
   return (
     <div className="relative w-full max-w-3xl">
       <input
+        value={value}
+        onChange={onChange}
         disabled={disabled}
         placeholder="Example: A floating hotair balloon with rainbow stripes"
         className="h-18 w-full resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-[18px] text-md text-[#36322F] px-4 pr-12 border border-[#e3e1de] shadow-[0_0_0_1px_#e3e1de66,0_1px_2px_#5f4a2e14,0_4px_6px_#5f4a2e0a,0_40px_40px_-24px_#684b2514] drop-shadow-[rgba(249,224,184,0.3)_-0.73px_-0.73px_35.65px] disabled:opacity-50"
@@ -33,3 +35,4 @@ export default function Input({loading}) {
     </div>
   );
 }
+

@@ -11,14 +11,9 @@ const publicClient = createPublicClient({
 //Prepare agent evm account
 const cdp = new CdpClient();
 const accountName = "agent";
-// If the account doesn't exist, it will be created.
-let sender = await cdp.evm.getOrCreateAccount({
-  name: accountName
-});
-console.log(`Created account with name ${sender.name}.`);
 
 // If the account already exists, it will be retrieved.
-sender = await cdp.evm.getOrCreateAccount({
+let sender = await cdp.evm.getOrCreateAccount({
   name: accountName
 });
 console.log(`Retrieved account with name ${sender.name}.`);

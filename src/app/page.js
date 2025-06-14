@@ -42,7 +42,6 @@ export default function HomePage() {
   // }, []);
 
   const handleSubmit = async (e) => {
-    if (e) e.preventDefault();
     setLoading(true);
     setError(null);
     setResult(null);
@@ -57,6 +56,7 @@ export default function HomePage() {
 
       if (res.ok) {
         const data = await res.json();
+        console.log(input);
         setResult(data.result); // This triggers modal via useEffect
       } else {
         const err = await res.json();
@@ -88,10 +88,15 @@ export default function HomePage() {
           you want. X402 protocol-powered, pay-per-use.
         </p>
 
-        <form className="w-full flex flex-col items-center gap-4 mt-12">
-          <Input loading={loading} />
+        <div className="w-full flex flex-col items-center gap-4 mt-12">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            loading={loading}
+          />
+
           <SubmitButton loading={loading} onSubmit={handleSubmit} />
-        </form>
+        </div>
 
         <Showcase />
 
