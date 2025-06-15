@@ -8,8 +8,8 @@ const client = new BedrockAgentRuntimeClient({
   region: process.env.AWS_REGION,
 });
 
-const agentId = "B0X0TSFRVH";
-const agentAliasId = "LBYV2HMEIK";
+const agentId = "H6QCBHFLDY";
+const agentAliasId = "WOWRA5NWLM";
 
 export default async function plan(inputText) {
   const sessionId = uuidv4();

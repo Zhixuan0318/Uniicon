@@ -57,6 +57,8 @@ Create an icon for ${inputText} using this style:
     const result = await openai.images.generate({
       model: "gpt-image-1",
       prompt: fullPrompt,
+      size: '1024x1024',
+      quality: "high"
     });
 
     const image_base64 = result.data[0].b64_json;
