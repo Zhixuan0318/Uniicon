@@ -29,13 +29,11 @@ console.log(`Requested funds from ETH faucet: https://sepolia.basescan.org/tx/${
 
 // Define owner addresses
 const owners = {
-  owner1: "0xB1061f26eDcAD70d33ea4681d96e18F9B5316791",
-  owner2: "0xB1061f26eDcAD70d33ea4681d96e18F9B5316791",
-  owner3: "0xB1061f26eDcAD70d33ea4681d96e18F9B5316791",
+  owner1: "0xB1061f26eDcAD70d33ea4681d96e18F9B5316791"
 };
 
 // Define pool amount as 1 USDC (USDC has 6 decimals, so 1 USDC = 1_000_000)
-const poolAmount = 1_000_000n;
+const poolAmount = 50_000n;
 
 // Calculate split amount
 const numberOfOwners = Object.keys(owners).length;

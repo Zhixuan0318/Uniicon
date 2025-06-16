@@ -11,6 +11,9 @@ import Showcase from "@/components/showcase";
 import ErrorToast from "@/components/error";
 import ResultModal from "@/components/result";
 
+import Image from "next/image";
+import glow from "../../public/glow.png";
+
 export default function HomePage() {
   const { data: walletClient } = useWalletClient();
 
@@ -66,15 +69,27 @@ export default function HomePage() {
     <main>
       <Header />
       <div className="p-4 mt-33 mb-10 mx-auto rounded-4xl bg-[#FBFAFA]">
-        <h1 className="text-[2.5rem] lg:text-[4.2rem] text-center text-[#36322F] font-semibold tracking-tight leading-[0.9] mt-24">
-          The animated icon generator
-          <br />
-          <span className="block leading-[1.3]">
-            <span className="relative px-1 text-orange-600 inline-flex justify-center items-center">
-              runs by AI agents on Base
+        <div className="relative flex justify-center items-center mt-24 mb-4">
+          {/* Glow background */}
+          <Image
+            src={glow}
+            alt="glow"
+            width={600}
+            height={600}
+            className="opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"
+          />
+
+          {/* Title Text */}
+          <h1 className="text-[2.5rem] lg:text-[4.2rem] text-center text-[#36322F] font-semibold tracking-tight leading-[0.9] relative z-10">
+            The animated icon generator
+            <br />
+            <span className="block leading-[1.3]">
+              <span className="relative px-1 text-orange-600 inline-flex justify-center items-center">
+                runs by AI agents on Base
+              </span>
             </span>
-          </span>
-        </h1>
+          </h1>
+        </div>
 
         <p className="text-center text-[#71717a] text-lg mt-8 max-w-2xl mx-82">
           Let a team of AI agents to plan, draw, script, and animate any icon
