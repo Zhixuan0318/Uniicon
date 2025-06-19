@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function ErrorToast({ message, duration = 5000 }) {
+export default function ErrorToast({ message, duration = 10000 }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function ErrorToast({ message, duration = 5000 }) {
 
   return (
     <div
-      className="fixed bottom-6 right-6 flex items-center w-full max-w-xs p-4 mb-4 text-gray-700 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 border border-red-200 dark:border-red-700 z-50 animate-slide-in"
+      className="fixed bottom-6 right-6 flex items-center w-full max-w-sm p-4 mb-4 text-gray-700 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 border border-red-200 dark:border-red-700 z-50 animate-slide-in"
       role="alert"
     >
       <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">

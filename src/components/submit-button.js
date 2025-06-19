@@ -1,22 +1,24 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { useAccount, useSwitchChain } from 'wagmi';
-import { config } from '@/config/wagmi';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from "react";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount, useSwitchChain } from "wagmi";
+import { config } from "@/config/wagmi";
+import Image from "next/image";
 
-import icon from '../../public/spark.png';
-import usdc from '../../public/usdc.png';
-import wallet from '../../public/wallet.png';
-import swap from '../../public/switch.png';
-import ProgressLoader from './progress';
+import icon from "../../public/spark.png";
+import usdc from "../../public/usdc.png";
+import wallet from "../../public/wallet.png";
+import swap from "../../public/switch.png";
+import ProgressLoader from "./progress";
+import ErrorToast from "./error";
 
 const TARGET_CHAIN = config.chains[0];
+const WHITELIST = ["0xd9ba52fc3366dded194c3c77c9c9955e8fe6059a"];
 
 export default function SubmitButton({ loading, onSubmit }) {
   const { openConnectModal } = useConnectModal();
-  const { isConnected, chainId } = useAccount();
+  const { isConnected, chainId, address } = useAccount();
   const { switchChain, isPending: isSwitching } = useSwitchChain({ config });
 
   const needsSwitch = isConnected && chainId !== TARGET_CHAIN.id;
@@ -25,6 +27,12 @@ export default function SubmitButton({ loading, onSubmit }) {
 
   const [percentage, setPercentage] = useState(0);
   const intervalRef = useRef(null);
+
+  const [showError, setShowError] = useState(false);
+
+  // ✅ Check if connected address is whitelisted
+  const isWhitelisted =
+    address?.toLowerCase && WHITELIST.includes(address.toLowerCase());
 
   // Simulate progress increase
   useEffect(() => {
@@ -55,16 +63,19 @@ export default function SubmitButton({ loading, onSubmit }) {
       openConnectModal?.();
     } else if (needsSwitch) {
       switchChain?.({ chainId: TARGET_CHAIN.id });
+    } else if (!isWhitelisted) {
+      setShowError(false); // Reset first
+      setTimeout(() => setShowError(true), 50); // Re-trigger
     } else {
       onSubmit?.();
     }
   };
 
-  let buttonText = 'Generate';
+  let buttonText = "Generate";
   let buttonIcon = icon;
 
   if (!isConnected) {
-    buttonText = 'Connect Wallet To Generate';
+    buttonText = "Connect Wallet To Generate";
     buttonIcon = wallet;
   } else if (needsSwitch) {
     buttonText = `Switch to ${TARGET_CHAIN.name}`;
@@ -95,7 +106,7 @@ export default function SubmitButton({ loading, onSubmit }) {
           className="mr-2 -ml-1.5"
         />
         <span className="whitespace-nowrap">
-          {isDisabled ? (loading ? 'Processing...' : 'Loading...') : buttonText}
+          {isDisabled ? (loading ? "Processing..." : "Loading...") : buttonText}
         </span>
       </button>
 
@@ -120,6 +131,9 @@ export default function SubmitButton({ loading, onSubmit }) {
         <p className="text-sm text-gray-400 pt-3 text-center">
           Unlock the generator with successful wallet connect
         </p>
+      )}
+      {showError && (
+        <ErrorToast message="Your wallet is not whitelisted to generate content. As Uniicon is still in testnet and the generation requires resources, kindly contact @tzx0318 on X to get a free trial!" />
       )}
     </div>
   );
