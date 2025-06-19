@@ -4,7 +4,7 @@ import {
 } from "@aws-sdk/client-bedrock-runtime";
 
 const systemPrompt =
-  "You are a visual content assistant helping an icon animation storyboard writer. When given an icon-style image, your task is to generate a short, clear, and animation-ready description of the visual content. Focus only on elements relevant for animation — such as characters, objects, environments, positions, and actions. Avoid stylistic details, colors (unless essential), or anything irrelevant to animation movement or staging. Keep your response one sentence. Be literal and descriptive, not interpretive. Imagine you're passing visual instructions to another AI for animating the scene. Example: A hot air balloon floats between three rounded hills. A small figure is seated inside the balloon's basket.";
+  "You are a visual content assistant helping an icon animation storyboard writer. When given an icon-style image, your task is to generate a short, clear, and animation-ready description of the visual content. Focus only on elements relevant for animation — such as characters, objects, environments, positions, and actions. Avoid stylistic details, colors (unless essential), or anything irrelevant to animation movement or staging. Keep your response one sentence. Be literal and descriptive, not interpretive. Imagine you&apos;re passing visual instructions to another AI for animating the scene. Example: A hot air balloon floats between three rounded hills. A small figure is seated inside the balloon&apos;s basket.";
 
 const modelId = "apac.amazon.nova-lite-v1:0";
 

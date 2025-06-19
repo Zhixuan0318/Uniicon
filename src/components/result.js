@@ -87,7 +87,7 @@ export default function ResultModal({ url, onClose }) {
 
         {/* Title */}
         <h2 className="text-3xl font-semibold text-center mb-4 mt-15">
-          Here's your 3D animated icon!
+          Here&apos;s your 3D animated icon!
         </h2>
 
         {/* Description */}
@@ -135,7 +135,7 @@ export default function ResultModal({ url, onClose }) {
           </div>
         ) : txHash ? (
           <div className="text-green-700 font-semibold text-lg text-center mb-4">
-            ✅ It's in your wallet too.<br />
+            ✅ It&apos;s in your wallet too.<br />
             <a
               href={`https://sepolia.basescan.org/tx/${txHash}`}
               target="_blank"
