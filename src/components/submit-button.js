@@ -14,7 +14,6 @@ import ProgressLoader from "./progress";
 import ErrorToast from "./error";
 
 const TARGET_CHAIN = config.chains[0];
-const WHITELIST = ["0xd9ba52fc3366dded194c3c77c9c9955e8fe6059a"];
 
 export default function SubmitButton({ loading, onSubmit }) {
   const { openConnectModal } = useConnectModal();
@@ -29,10 +28,6 @@ export default function SubmitButton({ loading, onSubmit }) {
   const intervalRef = useRef(null);
 
   const [showError, setShowError] = useState(false);
-
-  // ✅ Check if connected address is whitelisted
-  const isWhitelisted =
-    address?.toLowerCase && WHITELIST.includes(address.toLowerCase());
 
   // Simulate progress increase
   useEffect(() => {
@@ -58,16 +53,31 @@ export default function SubmitButton({ loading, onSubmit }) {
     return () => clearInterval(intervalRef.current);
   }, [loading]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!isConnected) {
       openConnectModal?.();
     } else if (needsSwitch) {
       switchChain?.({ chainId: TARGET_CHAIN.id });
-    } else if (!isWhitelisted) {
-      setShowError(false); // Reset first
-      setTimeout(() => setShowError(true), 50); // Re-trigger
     } else {
-      onSubmit?.();
+      try {
+        const res = await fetch("/api/check-trial", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ address }),
+        });
+
+        const data = await res.json();
+        if (data.allowed) {
+          onSubmit?.();
+        } else {
+          setShowError(false);
+          setTimeout(() => setShowError(true), 50);
+        }
+      } catch (err) {
+        console.error("Trial check failed", err);
+        setShowError(false);
+        setTimeout(() => setShowError(true), 50);
+      }
     }
   };
 
@@ -133,7 +143,7 @@ export default function SubmitButton({ loading, onSubmit }) {
         </p>
       )}
       {showError && (
-        <ErrorToast message="Your wallet is not whitelisted to generate content. As Uniicon is still in testnet and the generation requires resources, kindly contact @tzx0318 on X to get a free trial!" />
+        <ErrorToast message="Your wallet is not whitelisted or has used up its free trial for generating content. We're currently in testnet, and generation has a cost. Reach out to @tzx0318 on X to get a free trial!" />
       )}
     </div>
   );

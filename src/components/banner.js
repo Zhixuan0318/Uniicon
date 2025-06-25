@@ -1,7 +1,7 @@
 export default function Banner() {
   return (
     <a
-      href="https://ethglobal.com/events/cannes"
+      href="https://devfolio.co/projects/uniicon-8f79"
       target="_blank"
       rel="noopener noreferrer"
     >

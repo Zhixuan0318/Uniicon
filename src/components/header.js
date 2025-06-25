@@ -33,8 +33,20 @@ export default function Header() {
 
         {/* Button Section */}
         <div className="flex space-x-3">
-          <Button>Agent</Button>
-          <Button>MCP Server</Button>
+          <a
+            href="https://github.com/Zhixuan0318/Uniicon/tree/main/agent-example"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button>Agent</Button>
+          </a>
+          <a
+            href="https://github.com/Zhixuan0318/Uniicon/tree/main/mcp-server"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button>MCP Server</Button>
+          </a>
         </div>
       </header>
     </>
